@@ -13,6 +13,6 @@ public class JunitEx {
     }
 
     public static int findMin(int a, int b) {
-        return 2;
+        return Math.min(a, b);
     }
 }
