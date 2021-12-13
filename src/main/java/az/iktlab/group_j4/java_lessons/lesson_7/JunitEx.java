@@ -13,6 +13,11 @@ public class JunitEx {
     }
 
     public static int findMin(int a, int b) {
-        return 2222;
+        if(a>=b){
+            return a;
+        }
+        else {
+            return b;
+        }
     }
 }
