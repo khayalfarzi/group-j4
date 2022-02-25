@@ -1,8 +1,10 @@
 package az.iktlab.group_j4.java_lessons.lesson_22;
 
+import java.util.Arrays;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
 
 //        Block block = new Block();
 
