@@ -1,9 +1,15 @@
 package az.iktlab.group_j4.java_lessons.lesson_27.practice.service;
 
-import az.iktlab.group_j4.java_lessons.lesson_27.practice.dao.PersonDao;
+import az.iktlab.group_j4.java_lessons.lesson_27.practice.dao.repo.PersonDao;
+import az.iktlab.group_j4.java_lessons.lesson_27.practice.dao.entity.PersonEntity;
+import az.iktlab.group_j4.java_lessons.lesson_27.practice.mapper.PersonMapper;
 import az.iktlab.group_j4.java_lessons.lesson_27.practice.model.Person;
+import az.iktlab.group_j4.java_lessons.lesson_27.practice.util.Validator;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PersonService {
 
@@ -15,19 +21,29 @@ public class PersonService {
 
     public void savePerson(Person person) {
 
-        if (person.getName().length() < 3) {
-            System.out.println("Person name can't be less than 3");
-            return;
-        }
+        Validator.checkPersonName(person.getName());
 
-        // all checks must be here
+        PersonEntity entity = PersonMapper.mapToEntity(person);
 
         try {
-            dao.save(person);
+            dao.save(entity);
             System.out.println("Person successfully saved");
         } catch (SQLException e) {
             System.out.println("Error occurred when save person");
             System.out.printf("Error message: %s", e.getMessage());
         }
+    }
+
+    public List<Person> showPeople() {
+        List<PersonEntity> people = new ArrayList<>();
+
+        try {
+            people = dao.findAll();
+        } catch (SQLException e) {
+            System.out.println("Error occurred when select person");
+            System.out.printf("Error message: %s", e.getMessage());
+        }
+
+        return PersonMapper.mapToDto(people);
     }
 }

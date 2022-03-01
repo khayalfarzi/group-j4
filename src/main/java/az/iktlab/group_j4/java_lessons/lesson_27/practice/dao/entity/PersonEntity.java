@@ -1,24 +1,36 @@
-package az.iktlab.group_j4.java_lessons.lesson_27.practice.model;
+package az.iktlab.group_j4.java_lessons.lesson_27.practice.dao.entity;
+
+import az.iktlab.group_j4.java_lessons.lesson_27.practice.model.Gender;
 
 import java.util.Objects;
 
-public class Person {
+public class PersonEntity {
 
+    private Long id;
     private String name;
     private String surname;
     private String fatherName;
     private int age;
     private Gender gender;
 
-    public Person() {
+    public PersonEntity() {
     }
 
-    public Person(String name, String surname, String fatherName, int age, Gender gender) {
+    public PersonEntity(Long id, String name, String surname, String fatherName, int age, Gender gender) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.fatherName = fatherName;
         this.age = age;
         this.gender = gender;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -65,19 +77,20 @@ public class Person {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return age == person.age && Objects.equals(name, person.name) && Objects.equals(surname, person.surname) && Objects.equals(fatherName, person.fatherName) && gender == person.gender;
+        PersonEntity that = (PersonEntity) o;
+        return age == that.age && Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(surname, that.surname) && Objects.equals(fatherName, that.fatherName) && gender == that.gender;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, fatherName, age, gender);
+        return Objects.hash(id, name, surname, fatherName, age, gender);
     }
 
     @Override
     public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
+        return "PersonEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", fatherName='" + fatherName + '\'' +
                 ", age=" + age +
